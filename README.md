@@ -10,18 +10,27 @@ The whole point was to make "npm install binance" work with asterdex.com DEX, th
     let { deriveSignerAddress } = require('./asterdex-injector');
     let { WebsocketClient, USDMClient } = require('binance');
 
-    # Pro API keys are generated here for free https://www.asterdex.com/en/api-wallet , just login with your wallet, I used a Brave wallet
-    let USER        = '0xb123167Ed4b1233879D766FcDF2f12350f196f67'; // this is your wallet address
-    let PRIVATE_KEY = '0x673c123c69e123b8acbafe6f82cc123b945412383d3ff5c123bf36aba12345123'; // this is from website
-    let SIGNER      = deriveSignerAddress(PRIVATE_KEY); // this done by ethers npm
+    # Pro API keys are generated here for free https://www.asterdex.com/en/api-wallet
+    # just login with your wallet, I used a Brave wallet
 
+    // this is your wallet address
+    let USER        = '0xb123167Ed4b1233879D766FcDF2f12350f196f67';
+
+    // this is from website
+    let PRIVATE_KEY = '0x673c123c69e123b8acbafe6f82cc123b945412383d3ff5c123bf36aba12345123';
+
+    // this done by ethers npm
+    let SIGNER      = deriveSignerAddress(PRIVATE_KEY); 
+
+    // new authentication method because DEX
     userDataStream = new WebsocketClient({ 
       user: USER, 
       signer: SIGNER, 
       privateKey: PRIVATE_KEY,
       beautify: true
     });
-  
+
+    // new authentication method because DEX
     binance_usdm_authorized = new USDMClient({
       user: USER, 
       signer: SIGNER, 
